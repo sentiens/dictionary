@@ -1,0 +1,25 @@
+begin:
+    path:     /
+    defaults: { _controller: app.controller.quiz_controller:beginAction }
+    methods: [POST]
+
+get:
+    path:     /{id}
+    defaults: { _controller: app.controller.quiz_controller:getAction }
+    methods: [GET]
+    requirements:
+        id: '\d+'
+
+ask:
+    path: /{id}
+    defaults: { _controller: app.controller.quiz_controller:askAction }
+    methods: [POST]
+    requirements:
+        id: '\d+'
+
+answer:
+    path:     /{id}
+    defaults: { _controller: app.controller.quiz_controller:answerAction }
+    methods: [PUT]
+    requirements:
+        id: '\d+'

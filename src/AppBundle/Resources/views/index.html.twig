@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dictionary">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dictionary</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('angular/app/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('angular/app/bower_components/angular-loading-bar/build/loading-bar.css') }}">
+    <link rel="stylesheet" href="{{ asset('angular/style.css') }}">
+</head>
+<body>
+<div id="loading-bar-container"></div>
+
+<div class="container">
+    <div class="page-header text-center">
+        <h2>Словарь</h2>
+        <h4 class="text-muted">Проверь свой английский!</h4>
+    </div>
+    <div ng-view></div>
+</div>
+
+<script src="{{ asset('angular/app/bower_components/angular/angular.min.js') }}"></script>
+<script src="{{ asset('angular/app/bower_components/angular-route/angular-route.min.js') }}"></script>
+<script src="{{ asset('angular/app/bower_components/angular-messages/angular-messages.min.js') }}"></script>
+<script src="{{ asset('angular/app/bower_components/angular-animate/angular-animate.min.js') }}"></script>
+<script src="{{ asset('angular/app/bower_components/angular-loading-bar/build/loading-bar.min.js') }}"></script>
+<script src="{{ asset('angular/app/dictionary.js') }}"></script>
+<script src="{{ asset('angular/app/utils.js') }}"></script>
+<script src="{{ asset('angular/app/domain.js') }}"></script>
+<script src="{{ asset('angular/app/components/quiz_service/quiz_service.js') }}"></script>
+<script src="{{ asset('angular/app/view/begin_quiz/begin_quiz.js') }}"></script>
+<script src="{{ asset('angular/app/view/quiz/quiz.js') }}"></script>
+</body>
+</html>

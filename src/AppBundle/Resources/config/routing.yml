@@ -1,0 +1,9 @@
+index:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AppBundle::index.html.twig
+
+quiz:
+    resource: './routing_quiz.yml'
+    prefix: '/quiz'

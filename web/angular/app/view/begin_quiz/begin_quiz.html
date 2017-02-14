@@ -1,0 +1,32 @@
+<div class="col-centered col-md-2 text-center">
+    <form ng-submit="beginQuiz()" name="beginQuizForm" novalidate>
+        <div class="form-group"
+             ng-class="{
+                    'has-success': beginQuizForm.username.$valid && beginQuizForm.username.$touched,
+                    'has-error': beginQuizForm.username.$invalid && (beginQuizForm.username.$touched || beginQuizForm.$submitted)
+                }"
+        >
+            <label class="control-label" for="username">Введите ваше имя</label>
+            <input
+                    type="text"
+                    name="username"
+                    class="form-control text-center"
+                    id="username"
+                    placeholder="Иван"
+                    ng-model="username"
+                    maxlength="10"
+                    ng-required="true"
+                    ng-pattern="/^[A-Za-zА-Яа-я\s]+$/"
+            >
+            <div class="help-block"
+                 ng-show="beginQuizForm.username.$invalid && beginQuizForm.username.$touched || beginQuizForm.$submitted">
+                <ng-messages for="beginQuizForm.$error">
+                    <ng-message when="required">Это поле не должно быть пустым</ng-message>
+                    <ng-message when="maxlength">Максимальная длина 10 символов</ng-message>
+                    <ng-message when="pattern">Допустимы только буквы русского и латинского алфавита</ng-message>
+                </ng-messages>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Начать тест</button>
+    </form>
+</div>

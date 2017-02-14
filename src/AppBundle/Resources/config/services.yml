@@ -1,0 +1,60 @@
+services:
+    kernel.event_listener.json_request_transformer:
+        class: Qandidate\Common\Symfony\HttpKernel\EventListener\JsonRequestTransformerListener
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+    app.service.quiz_dto_converter:
+        class: AppBundle\DTO\QuizDTOConverter
+
+    app.service.quiz_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\Quiz
+
+    app.service.word_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\Word
+
+    app.service.translation_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\Translation
+
+    app.service.get_quiz:
+        class: AppBundle\App\GetQuiz
+        arguments:
+            - '@app.service.quiz_repository'
+            - '@app.service.quiz_dto_converter'
+
+    app.service.begin_quiz:
+        class: AppBundle\App\BeginQuiz
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    app.service.answer_question:
+        class: AppBundle\App\AnswerQuestion
+        arguments:
+            - '@app.service.quiz_repository'
+            - '@app.service.word_repository'
+            - '@doctrine.orm.entity_manager'
+
+    app.service.ask_new_question:
+        class: AppBundle\App\AskNewQuestion
+        arguments:
+            - '@app.service.quiz_repository'
+            - '@app.service.word_repository'
+            - '@app.service.translation_repository'
+            - '@doctrine.orm.entity_manager'
+
+    app.controller.quiz_controller:
+        class: AppBundle\Controller\QuizController
+        arguments:
+            - '@app.service.begin_quiz'
+            - '@app.service.get_quiz'
+            - '@app.service.ask_new_question'
+            - '@app.service.answer_question'

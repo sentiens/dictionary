@@ -1,0 +1,35 @@
+<div ng-show="quizHasQuestion()">
+    <div class="row text-center">
+        <div>
+        <span>
+            <i class="glyphicon glyphicon-user"></i> {{ quiz.name }}
+        </span>
+            | <span class="text-warning"><i class="glyphicon glyphicon-star"></i> {{ quiz.score }}</span>
+            | <i class="glyphicon glyphicon-heart text-success" ng-repeat="i in numberOf(quiz.mistakesAvailable) track by $index"></i><i class="glyphicon glyphicon-heart text-muted" ng-repeat="i in numberOf(3 - quiz.mistakesAvailable) track by $index"></i>
+        </div>
+    </div>
+    <hr>
+    <div class="col-centered col-md-4 text-center">
+        <h4>{{ quiz.question }}</h4>
+        <br>
+        <div class="list-group">
+            <a href=""
+               class="list-group-item"
+               ng-class="{'disabled': answer.failed }"
+               ng-click="answerQuiz(answer)"
+               ng-repeat="answer in quiz.answers"
+            >
+                {{ answer.word }}
+            </a>
+        </div>
+        <p class="text-danger" ng-show="showAnswerWasWrong">Неправильный ответ! Попробуйте еще.</p>
+    </div>
+</div>
+
+<div class="col-centered col-md-4 text-center" ng-show="quizEnded()">
+    <h3>Тест окончен, {{quiz.name}}!</h3>
+    <p>Вы набрали {{quiz.score}} очков.</p>
+    <a href="#!/begin-quiz" id="begin_new_quiz" class="btn btn-default">
+        Начать новый тест
+    </a>
+</div>
